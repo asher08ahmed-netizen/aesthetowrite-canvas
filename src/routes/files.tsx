@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Download, Trash2, FileText, Plus } from "lucide-react";
-import { loadDocs, saveDocs, downloadDoc, type Doc } from "@/lib/docs-store";
+import { Trash2, FileText, Plus } from "lucide-react";
+import { loadDocs, saveDocs, type Doc } from "@/lib/docs-store";
 
 export const Route = createFileRoute("/files")({
   head: () => ({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/files")({
       {
         name: "description",
         content:
-          "Every note you saved on aesthet0write, kept right here in the web. Open, edit, download or delete a file.",
+          "Every note you saved on aesthet0write, kept right here in the web. Open, edit or delete a file.",
       },
       { property: "og:title", content: "Your files — aesthet0write" },
       {
@@ -94,14 +94,6 @@ function FilesPage() {
                     Open
                   </button>
                   <span className="flex-1" />
-                  <button
-                    aria-label={`Download ${d.title}`}
-                    title="Download"
-                    onClick={() => downloadDoc(d)}
-                    className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <Download className="size-4" />
-                  </button>
                   <button
                     aria-label={`Delete ${d.title}`}
                     title="Delete"
