@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { History, Download, Save, Plus, Trash2, X } from "lucide-react";
+import { History, Download, Save, Plus, Trash2, X, PenLine, FileText, RotateCcw } from "lucide-react";
 import { loadDocs, saveDocs, newId, downloadDoc, type Doc } from "@/lib/docs-store";
 
 export const Route = createFileRoute("/")({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "A clean desk for writing. Save what you write as a file and reopen or edit it whenever.",
+          "A clean red-and-white desk for writing. Save what you write as a file and reopen or edit it whenever.",
       },
       { property: "og:title", content: "aesthet0write — write, save, revisit" },
       {
@@ -19,8 +19,53 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Writer,
+  component: Home,
 });
+
+function Home() {
+  return (
+    <main className="mx-auto max-w-5xl px-5 pb-24">
+      <Hero />
+      <Writer />
+    </main>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="py-12 sm:py-16">
+      <div className="paper rounded-xl border px-6 py-10 sm:px-10 sm:py-14">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div className="max-w-xl">
+            <h1 className="font-display text-3xl tracking-tight sm:text-4xl">
+              A clean desk for{" "}
+              <span className="text-primary">whatever you have to say.</span>
+            </h1>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+              aesthet0write is a quiet sheet of paper: write anything, save it as a file, and come
+              back later to keep going. Everything lives on your device.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-3 sm:w-72">
+            {[
+              { icon: PenLine, label: "Write" },
+              { icon: FileText, label: "Save" },
+              { icon: RotateCcw, label: "Return" },
+            ].map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center gap-2 rounded-lg border px-3 py-4 text-center"
+              >
+                <Icon className="size-5 text-primary" />
+                <span className="text-xs font-medium text-muted-foreground">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Writer() {
   const [docs, setDocs] = useState<Doc[]>([]);
@@ -82,7 +127,7 @@ function Writer() {
   const words = content.trim() ? content.trim().split(/\s+/).length : 0;
 
   return (
-    <main className="mx-auto max-w-5xl px-5 pb-24">
+    <section className="pb-8">
       <div className="paper relative rounded-xl border">
         <div className="flex items-center gap-2 border-b px-4 py-3">
           <input
@@ -164,7 +209,7 @@ function Writer() {
           </aside>
         )}
       </div>
-    </main>
+    </section>
   );
 }
 
