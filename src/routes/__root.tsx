@@ -134,6 +134,9 @@ function RootComponent() {
               <Link to="/" activeProps={{ className: "text-foreground" }}>
                 Write
               </Link>
+              <Link to="/files" activeProps={{ className: "text-foreground" }}>
+                Files
+              </Link>
               <Link to="/about" activeProps={{ className: "text-foreground" }}>
                 About
               </Link>
