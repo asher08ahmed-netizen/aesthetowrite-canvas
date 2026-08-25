@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { History, Download, Save, Plus, Trash2, X } from "lucide-react";
-import { loadDocs, saveDocs, newId, downloadDoc, type Doc } from "@/lib/docs-store";
+import { History, Save, Plus, Trash2, X } from "lucide-react";
+import { loadDocs, saveDocs, newId, type Doc } from "@/lib/docs-store";
 
 export const Route = createFileRoute("/write")({
   validateSearch: (search: Record<string, unknown>): { doc?: string } =>
@@ -118,26 +118,12 @@ function Writer() {
           <IconButton label="History" onClick={() => setHistoryOpen((v) => !v)}>
             <History className="size-4" />
           </IconButton>
-          <IconButton
-            label="Download as file"
-            onClick={() =>
-              downloadDoc({
-                id: activeId ?? "tmp",
-                title: title || "untitled",
-                content,
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
-              })
-            }
-          >
-            <Download className="size-4" />
-          </IconButton>
           <button
             onClick={save}
             className="ml-1 inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             <Save className="size-4" />
-            {saved ? "Saved" : "Save"}
+            {saved ? "Saved to web" : "Save to web"}
           </button>
         </div>
 

@@ -28,13 +28,3 @@ export function saveDocs(docs: Doc[]) {
 export function newId() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
-
-export function downloadDoc(doc: Doc) {
-  const blob = new Blob([doc.content], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `${(doc.title || "untitled").replace(/[^\w\- ]+/g, "").trim() || "untitled"}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
