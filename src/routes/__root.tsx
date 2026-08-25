@@ -124,8 +124,29 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="mesh-surface min-h-screen">
+        <div className="mesh-grid min-h-screen">
+          <header className="mx-auto flex max-w-5xl items-center justify-between px-5 py-5">
+            <Link to="/" className="font-display text-lg tracking-tight text-primary">
+              aesthet<span className="text-foreground">0</span>write
+            </Link>
+            <nav className="flex items-center gap-5 text-sm text-muted-foreground">
+              <Link to="/" activeProps={{ className: "text-foreground" }}>
+                Write
+              </Link>
+              <Link to="/about" activeProps={{ className: "text-foreground" }}>
+                About
+              </Link>
+              <Link to="/founder" activeProps={{ className: "text-foreground" }}>
+                Founder
+              </Link>
+            </nav>
+          </header>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </div>
+      </div>
     </QueryClientProvider>
+
   );
 }
