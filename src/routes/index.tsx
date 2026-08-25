@@ -4,13 +4,16 @@ import { History, Download, Save, Plus, Trash2, X, PenLine, FileText, RotateCcw 
 import { loadDocs, saveDocs, newId, downloadDoc, type Doc } from "@/lib/docs-store";
 
 export const Route = createFileRoute("/")({
+  validateSearch: (search: Record<string, unknown>): { doc?: string } =>
+    typeof search["doc"] === "string" ? { doc: search["doc"] } : {},
+
   head: () => ({
     meta: [
       { title: "aesthet0write — write, save, revisit" },
       {
         name: "description",
         content:
-          "A clean red-and-white desk for writing. Save what you write as a file and reopen or edit it whenever.",
+          "A clean red-and-white desk for writing. Save what you write as a file in the web and reopen or edit it whenever.",
       },
       { property: "og:title", content: "aesthet0write — write, save, revisit" },
       {
@@ -30,6 +33,7 @@ function Home() {
     </main>
   );
 }
+
 
 function Hero() {
   return (
@@ -76,9 +80,19 @@ function Writer() {
   const [saved, setSaved] = useState(false);
   const savedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const { doc: docParam } = Route.useSearch();
+
   useEffect(() => {
-    setDocs(loadDocs());
-  }, []);
+    const all = loadDocs();
+    setDocs(all);
+    const found = docParam ? all.find((d) => d.id === docParam) : undefined;
+    if (found) {
+      setActiveId(found.id);
+      setTitle(found.title);
+      setContent(found.content);
+    }
+  }, [docParam]);
+
 
   function persist(next: Doc[]) {
     const sorted = [...next].sort((a, b) => b.updatedAt - a.updatedAt);
