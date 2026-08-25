@@ -50,7 +50,7 @@ function FilesPage() {
               </p>
             </div>
             <Link
-              to="/"
+              to="/write"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               <Plus className="size-4" />
@@ -73,7 +73,7 @@ function FilesPage() {
             {docs.map((d) => (
               <li key={d.id} className="paper flex flex-col rounded-xl border p-5">
                 <button
-                  onClick={() => navigate({ to: "/", search: { doc: d.id } })}
+                  onClick={() => navigate({ to: "/write", search: { doc: d.id } })}
                   className="text-left"
                 >
                   <span className="font-display block truncate text-lg tracking-tight">
@@ -88,7 +88,7 @@ function FilesPage() {
                 </button>
                 <div className="mt-4 flex items-center gap-2 border-t pt-3">
                   <button
-                    onClick={() => navigate({ to: "/", search: { doc: d.id } })}
+                    onClick={() => navigate({ to: "/write", search: { doc: d.id } })}
                     className="text-sm text-primary hover:underline"
                   >
                     Open
