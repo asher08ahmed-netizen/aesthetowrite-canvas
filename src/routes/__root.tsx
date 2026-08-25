@@ -132,6 +132,9 @@ function RootComponent() {
             </Link>
             <nav className="flex items-center gap-5 text-sm text-muted-foreground">
               <Link to="/" activeProps={{ className: "text-foreground" }}>
+                Home
+              </Link>
+              <Link to="/write" activeProps={{ className: "text-foreground" }}>
                 Write
               </Link>
               <Link to="/files" activeProps={{ className: "text-foreground" }}>
