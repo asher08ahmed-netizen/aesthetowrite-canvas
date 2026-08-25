@@ -80,9 +80,19 @@ function Writer() {
   const [saved, setSaved] = useState(false);
   const savedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const { doc: docParam } = Route.useSearch();
+
   useEffect(() => {
-    setDocs(loadDocs());
-  }, []);
+    const all = loadDocs();
+    setDocs(all);
+    const found = docParam ? all.find((d) => d.id === docParam) : undefined;
+    if (found) {
+      setActiveId(found.id);
+      setTitle(found.title);
+      setContent(found.content);
+    }
+  }, [docParam]);
+
 
   function persist(next: Doc[]) {
     const sorted = [...next].sort((a, b) => b.updatedAt - a.updatedAt);
