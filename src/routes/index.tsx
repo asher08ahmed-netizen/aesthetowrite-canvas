@@ -4,9 +4,9 @@ import { History, Download, Save, Plus, Trash2, X, PenLine, FileText, RotateCcw 
 import { loadDocs, saveDocs, newId, downloadDoc, type Doc } from "@/lib/docs-store";
 
 export const Route = createFileRoute("/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    doc: typeof search.doc === "string" ? search.doc : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { doc?: string } =>
+    typeof search["doc"] === "string" ? { doc: search["doc"] } : {},
+
   head: () => ({
     meta: [
       { title: "aesthet0write — write, save, revisit" },
