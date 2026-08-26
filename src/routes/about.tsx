@@ -34,7 +34,7 @@ function About() {
         </p>
         <dl className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
-            ["Write", "A blank sheet and a cursor."],
+            ["Write", "A blank sheet of paper and your mind."],
             ["Save", "Named files, kept locally."],
             ["Return", "Reopen and edit any time."],
           ].map(([term, def]) => (
